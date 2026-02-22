@@ -1,10 +1,10 @@
 /**
  * LIFE TIMELINE DOMAIN TYPES
- * 
+ *
  * This file defines the core data contracts used across the Life Timeline wallpaper application.
- * 
+ *
  * The application follows a 3-stage data transformation pipeline:
- * 
+ *
  *      User Input (DOB, expectancy, theme, message)
  *      ⬇️
  *      UserConfig (persisted in localStorage)
@@ -14,25 +14,24 @@
  *      RenderConfig (computed renderer contract)
  *      ⬇️
  *      Canvas REndering Engine (draws life timeline)
- * 
+ *
  * IMPORTANT ARCHITECTURAL RULE:
  * -UserConfig contains ONLY user-controlled input values.
  * -RenderConfig contains ONLY derived runtime values.
  * -Derived values MUST NEVER be stored in localStorage.
- * 
+ *
  * This separation ensures:
  * -persistence safety
  * -rendering determinism
  * -architectural clarity
- * 
+ *
  * This file serves as the shared contract between:
  * -React UI Layer
  * -Persistence Layer (localStorage)
  * -Utility Layer (time calculations)
  * -Canvas Rendering Engine
- * 
+ *
  */
-
 
 /**
  * Defines the geometric shape used to render each life-month cell.
@@ -40,8 +39,7 @@
  * This affects how the Canvas renderer draws individual timeline units.
  * React layer selects this value via user configuration.
  */
-export type Shape = "square" | "circle" | "heart"; 
-
+export type Shape = 'square' | 'circle' | 'heart'
 
 /**
  * Defines the active theme mode selected by the user.
@@ -49,8 +47,7 @@ export type Shape = "square" | "circle" | "heart";
  * This determines the color palette used by the Canvas renderer
  * during timeline drawing.
  */
-export type ThemeMode = "light" | "dark";
-
+export type ThemeMode = 'light' | 'dark'
 
 /**
  * Semantic classification of a single life-month cell.
@@ -66,31 +63,30 @@ export type ThemeMode = "light" | "dark";
  * - future: not yet lived
  * - empty: optional safety fallback
  */
-export type CellState = "past" | "present" | "future" | "empty";
-
+export type CellState = 'past' | 'present' | 'future' | 'empty'
 
 /**
  * USER CONFIGURATION MODEL
- * 
+ *
  * Represents user-controlled input values.
- * 
- * This object is: 
+ *
+ * This object is:
  * -collected via React UI
  * -validated in utils layers
  * -persisted in localStorage
- * 
+ *
  * MUST NOT contain derived values such as:
  * -totalMonths
  * -fullMonthsLived
  * -currentMonthProgress
- * 
- * DOB is stored as an ISO string (YYYY-MM-DD) to ensure 
+ *
+ * DOB is stored as an ISO string (YYYY-MM-DD) to ensure
  * JSON serialization compatibility with localStorage.
  */
 export interface UserConfig {
   /**
    * User's date of birth in ISO format (YYY-MM-DD).
-   * @example: "1995-01-01"
+   * @example: "2004-12-19"
    * @default: "1995-01-01"
    */
   readonly dob: string
@@ -120,16 +116,15 @@ export interface UserConfig {
   readonly shape: Shape
 }
 
-
 /**
  * RENDER CONFIGURATION MODEL
- * 
+ *
  * Represents derived runtime values computed from UserConfig.
- * 
+ *
  * This object is:
  * -produced by the utils layer
  * -consumed by the Canvas rendered
- * 
+ *
  * MUST NEVER be persisted in localStorage
  */
 export interface RenderConfig {
@@ -171,8 +166,6 @@ export interface RenderConfig {
   shape: Shape
 }
 
-
-
 /**
  * Default configuration used when:
  * - Application runs for the first time
@@ -182,9 +175,9 @@ export interface RenderConfig {
  * for initial visualization.
  */
 export const defaultConfig: UserConfig = {
-  dob: "1995-01-01",
+  dob: '1995-01-01',
   expectancy: 80,
-  message: "Your time, your story.",
-  theme: "light",
-  shape: "square"
-};
+  message: 'Your time, your story.',
+  theme: 'light',
+  shape: 'square',
+}
