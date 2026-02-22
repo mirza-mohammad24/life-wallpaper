@@ -5,11 +5,11 @@
  * -fallback to defaultConfig() if nothing exists in the localStorage
  */
 
-import type { Shape, ThemeMode, UserConfig } from '../types/life.types.ts';
+import type { Shape, ThemePreference, UserConfig } from '../types/life.types.ts';
 import { defaultConfig } from '../types/life.types.ts';
 
 const LOCAL_STORAGE_KEY = 'life_timeline_config';
-const VALID_THEMES = ['light', 'dark'] as const;
+const VALID_THEMES_PREFERENCES = ['light', 'dark', 'system'] as const;
 const VALID_SHAPES = ['square', 'circle', 'heart'] as const;
 
 //Type Predicates implementation with help of Type Guards
@@ -22,11 +22,11 @@ const isShape = (value : unknown): value is Shape => {
 };
 
 /**
- * Type Guard: Validates if an unknown value is a supported ThemeMode.
- * If true, narrows the type from 'unknown' to 'ThemeMode' for the compiler.
+ * Type Guard: Validates if an unknown value is a supported ThemePreference.
+ * If true, narrows the type from 'unknown' to 'ThemePreference' for the compiler.
  */
-const isThemeMode = (value : unknown): value is ThemeMode => {
-  return VALID_THEMES.includes(value as ThemeMode);
+const isThemePreference = (value : unknown): value is ThemePreference => {
+  return VALID_THEMES_PREFERENCES.includes(value as ThemePreference);
 };
 
 
@@ -70,7 +70,7 @@ export const loadConfig = (): UserConfig => {
       ? safeObject.message 
       : defaultConfig.message,
 
-      theme: isThemeMode(safeObject.theme)
+      theme: isThemePreference(safeObject.theme)
       ? safeObject.theme 
       : defaultConfig.theme,
 

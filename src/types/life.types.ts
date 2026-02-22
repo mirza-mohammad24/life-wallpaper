@@ -39,15 +39,22 @@
  * This affects how the Canvas renderer draws individual timeline units.
  * React layer selects this value via user configuration.
  */
-export type Shape = 'square' | 'circle' | 'heart'
+export type Shape = 'square' | 'circle' | 'heart';
 
 /**
- * Defines the active theme mode selected by the user.
+ * Defines the active theme preference selected by the user.
  *
  * This determines the color palette used by the Canvas renderer
  * during timeline drawing.
  */
-export type ThemeMode = 'light' | 'dark'
+export type ThemePreference = 'light' | 'dark' | 'system';
+
+/**
+ * Defines the active theme mode.
+ * 
+ * Its value is dynamically resolved on the basis of user's ThemePreference
+ */
+export type ThemeMode = 'light' | 'dark';
 
 /**
  * Semantic classification of a single life-month cell.
@@ -63,7 +70,7 @@ export type ThemeMode = 'light' | 'dark'
  * - future: not yet lived
  * - empty: optional safety fallback
  */
-export type CellState = 'past' | 'present' | 'future' | 'empty'
+export type CellState = 'past' | 'present' | 'future' | 'empty';
 
 /**
  * USER CONFIGURATION MODEL
@@ -107,7 +114,7 @@ export interface UserConfig {
    * User's choice of theme
    * @default: "light"
    */
-  readonly theme: ThemeMode
+  readonly theme: ThemePreference
 
   /**
    * User's choice of shape
