@@ -19,7 +19,7 @@
 
 import type { ChangeEvent, SyntheticEvent } from 'react';
 import { useState } from 'react';
-import type { UserConfig } from '../types/life.types';
+import type { UserConfig } from '../types/life.types.ts';
 
 interface SettingsOverlayProps {
   /**
