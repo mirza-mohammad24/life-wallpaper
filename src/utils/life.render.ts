@@ -68,6 +68,12 @@ import type {
 } from '../types/life.types.ts'
 import { getFullMonthsLived, getCurrentMonthProgress } from './life.time.ts'
 
+
+/**
+ * Function to dynamically resolve the themePreference into the corresponding themeMode
+ * @param {ThemePreference} themePreference pass the themePreference
+ * @returns {ThemeMode} return the corresponding themeMode
+ */
 function resolveTheme(themePreference: ThemePreference): ThemeMode {
   if (themePreference === 'light') {
     return 'light'
@@ -80,6 +86,11 @@ function resolveTheme(themePreference: ThemePreference): ThemeMode {
   }
 }
 
+/**
+ * The function to convert the userConfig into renderConfig
+ * @param {UserConfig} userConfig pass the userConfig
+ * @returns {RenderConfig} returns the renderConfig to be consumed by the Canvas rendering engine
+ */
 export const buildRenderConfig = (userConfig: UserConfig): RenderConfig => {
   const dob = userConfig.dob
   const expectancy = userConfig.expectancy
