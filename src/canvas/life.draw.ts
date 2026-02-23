@@ -33,7 +33,7 @@ type RGB = [number, number, number];
 const LIGHT_THEME = {
   start: [34, 197, 94] as RGB, // Tailwind Green-500
   end: [239, 68, 68] as RGB, // Tailwind Red-500
-  future: '#E5E7EB', // Tailwind Gray-200
+  future: '#D1D5DB', // Tailwind Gray-300
 };
 
 const DARK_THEME = {
