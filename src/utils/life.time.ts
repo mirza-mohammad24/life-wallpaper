@@ -49,61 +49,61 @@
  * @returns {number} the number of months that the user has FULLY lived since his dob
  */
 export const getFullMonthsLived = (dob: string): number => {
-  const presentDate = new Date()
-  const birthDay = new Date(dob)
+  const presentDate = new Date();
+  const birthDay = new Date(dob);
 
   if (isNaN(birthDay.getTime())) {
-    return 0
+    return 0;
   }
 
-  const presentDay = presentDate.getDate()
-  const presentMonth = presentDate.getMonth()
-  const presentYear = presentDate.getFullYear()
+  const presentDay = presentDate.getDate();
+  const presentMonth = presentDate.getMonth();
+  const presentYear = presentDate.getFullYear();
 
-  const dobDay = birthDay.getDate()
-  const dobMonth = birthDay.getMonth()
-  const dobYear = birthDay.getFullYear()
+  const dobDay = birthDay.getDate();
+  const dobMonth = birthDay.getMonth();
+  const dobYear = birthDay.getFullYear();
 
-  const yearDiff = presentYear - dobYear
-  const monthDiff = presentMonth - dobMonth
-  const monthsFromYears = yearDiff * 12
+  const yearDiff = presentYear - dobYear;
+  const monthDiff = presentMonth - dobMonth;
+  const monthsFromYears = yearDiff * 12;
 
   const returnVal =
     presentDay >= dobDay
       ? monthsFromYears + monthDiff
-      : monthsFromYears + monthDiff - 1
+      : monthsFromYears + monthDiff - 1;
 
   //prevents code from breaking if a future dob is entered
-  return Math.max(returnVal, 0)
-}
+  return Math.max(returnVal, 0);
+};
 
 /**
  * @param {string} dob pass the date of birth of the user
  * @return {number} a fractional value = [0,1] representing the current month progress
  */
 export const getCurrentMonthProgress = (dob: string): number => {
-  const birthDay = new Date(dob)
+  const birthDay = new Date(dob);
 
   if (isNaN(birthDay.getTime())) {
-    return 0
+    return 0;
   }
 
-  const fullMonthsLived = getFullMonthsLived(dob)
+  const fullMonthsLived = getFullMonthsLived(dob);
 
   //start of current month (Note: we move with respect to dob not actual month starting and endings)
-  const startDate = new Date(dob)
-  startDate.setMonth(startDate.getMonth() + fullMonthsLived)
+  const startDate = new Date(dob);
+  startDate.setMonth(startDate.getMonth() + fullMonthsLived);
 
   //end of current month (Note: with respect to our dob)
-  const endDate = new Date(dob)
-  endDate.setMonth(endDate.getMonth() + fullMonthsLived + 1)
+  const endDate = new Date(dob);
+  endDate.setMonth(endDate.getMonth() + fullMonthsLived + 1);
 
-  const now = new Date()
-  const elapsed = now.getTime() - startDate.getTime()
-  const duration = endDate.getTime() - startDate.getTime()
+  const now = new Date();
+  const elapsed = now.getTime() - startDate.getTime();
+  const duration = endDate.getTime() - startDate.getTime();
 
-  const progress = elapsed / duration
+  const progress = elapsed / duration;
 
   //ensures the range of [0,1]
-  return Math.min(Math.max(progress, 0), 1)
-}
+  return Math.min(Math.max(progress, 0), 1);
+};

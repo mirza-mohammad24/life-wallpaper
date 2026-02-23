@@ -114,7 +114,7 @@
  * It strictly adapts timeline size to viewport geometry.
  */
 
-import type { LayoutConfig } from "../types/life.types.ts"
+import type { LayoutConfig } from '../types/life.types.ts';
 
 /**
  * Function to calculate the layout of the grid
@@ -128,26 +128,26 @@ export const computeGridLayout = (
   width: number,
   height: number,
 ): LayoutConfig => {
-  const horizontalPadding = 0.1 * width //10% of width
-  const verticalPadding = 0.1 * height //10% of height
+  const horizontalPadding = 0.1 * width; //10% of width
+  const verticalPadding = 0.1 * height; //10% of height
 
-  const usableWidth = width - 2 * horizontalPadding
-  const usableHeight = height - 2 * verticalPadding
+  const usableWidth = width - 2 * horizontalPadding;
+  const usableHeight = height - 2 * verticalPadding;
 
   const rows = Math.max(
     Math.floor(Math.sqrt((totalMonths * usableHeight) / usableWidth)),
     1,
-  )
+  );
 
-  const columns = Math.ceil(totalMonths / rows)
+  const columns = Math.ceil(totalMonths / rows);
 
-  const cellWidth = usableWidth / columns
-  const cellHeight = usableHeight / rows
+  const cellWidth = usableWidth / columns;
+  const cellHeight = usableHeight / rows;
 
-  const cellSize = Math.min(cellWidth, cellHeight)
+  const cellSize = Math.min(cellWidth, cellHeight);
 
-  const offsetX = (width - columns * cellSize) / 2
-  const offsetY = (height - rows * cellSize) / 2
+  const offsetX = (width - columns * cellSize) / 2;
+  const offsetY = (height - rows * cellSize) / 2;
 
   return {
     rows,
@@ -155,5 +155,5 @@ export const computeGridLayout = (
     cellSize,
     offsetX,
     offsetY,
-  }
-}
+  };
+};

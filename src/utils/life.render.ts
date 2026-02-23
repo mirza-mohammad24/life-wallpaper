@@ -1,7 +1,7 @@
 /**
- * 
+ *
  * LIFE TIMELINE RENDER CONFIG BUILDER
- * 
+ *
  * This file is responsible for transforming user-controlled configuration
  * (UserConfig) into renderer-ready runtime state (RenderConfig).
  *
@@ -13,16 +13,16 @@
  * single contract between domain logic and the rendering layer.
  *
  * RESPONSIBILITIES:
- * 
+ *
  * - Derive total timeline scope (totalMonths) from life expectancy
  * - Compute fully lived life-months from DOB
  * - Compute fractional progress of the current life-month
  * - Resolve ThemePreference → ThemeMode at runtime
  * - Pass through renderer-relevant user selections (message, shape)
  *
- * 
+ *
  * THEME RESOLUTION:
- * 
+ *
  * UserConfig stores a ThemePreference:
  *     "light" | "dark" | "system"
  *
@@ -35,9 +35,9 @@
  *     "light" | "dark"
  *
  * The renderer does not understand or handle "system" preferences.
- * 
+ *
  * DOMAIN GUARANTEES:
- * 
+ *
  * The returned RenderConfig ensures:
  * - totalMonths ≥ 0
  * - fullMonthsLived ≥ 0
@@ -47,7 +47,7 @@
  * This guarantees the Canvas renderer receives safe, deterministic input.
  *
  * NOTE:
- * 
+ *
  * This builder performs pure computation and runtime resolution only.
  * It must NOT:
  * - persist data
@@ -57,7 +57,7 @@
  *
  * Application-level controllers are responsible for invoking this builder
  * when user configuration or environment state (e.g. system theme) changes.
- * 
+ *
  */
 
 import type {
@@ -65,9 +65,8 @@ import type {
   ThemeMode,
   ThemePreference,
   UserConfig,
-} from '../types/life.types.ts'
-import { getFullMonthsLived, getCurrentMonthProgress } from './life.time.ts'
-
+} from '../types/life.types.ts';
+import { getFullMonthsLived, getCurrentMonthProgress } from './life.time.ts';
 
 /**
  * Function to dynamically resolve the themePreference into the corresponding themeMode
@@ -76,13 +75,13 @@ import { getFullMonthsLived, getCurrentMonthProgress } from './life.time.ts'
  */
 function resolveTheme(themePreference: ThemePreference): ThemeMode {
   if (themePreference === 'light') {
-    return 'light'
+    return 'light';
   } else if (themePreference === 'dark') {
-    return 'dark'
+    return 'dark';
   } else {
     return window.matchMedia('(prefers-color-scheme: dark)').matches
       ? 'dark'
-      : 'light'
+      : 'light';
   }
 }
 
@@ -92,17 +91,17 @@ function resolveTheme(themePreference: ThemePreference): ThemeMode {
  * @returns {RenderConfig} returns the renderConfig to be consumed by the Canvas rendering engine
  */
 export const buildRenderConfig = (userConfig: UserConfig): RenderConfig => {
-  const dob = userConfig.dob
-  const expectancy = userConfig.expectancy
-  const message = userConfig.message
-  const themePreference = userConfig.theme
-  const shape = userConfig.shape
+  const dob = userConfig.dob;
+  const expectancy = userConfig.expectancy;
+  const message = userConfig.message;
+  const themePreference = userConfig.theme;
+  const shape = userConfig.shape;
 
-  const totalMonths = expectancy * 12
-  const fullMonthsLived = getFullMonthsLived(dob)
-  const currentMonthProgress = getCurrentMonthProgress(dob)
+  const totalMonths = expectancy * 12;
+  const fullMonthsLived = getFullMonthsLived(dob);
+  const currentMonthProgress = getCurrentMonthProgress(dob);
 
-  const themeMode: ThemeMode = resolveTheme(themePreference)
+  const themeMode: ThemeMode = resolveTheme(themePreference);
 
   const renderConfig: RenderConfig = {
     totalMonths: totalMonths,
@@ -111,7 +110,7 @@ export const buildRenderConfig = (userConfig: UserConfig): RenderConfig => {
     themeMode: themeMode,
     message: message,
     shape: shape,
-  }
+  };
 
   return renderConfig;
-}
+};

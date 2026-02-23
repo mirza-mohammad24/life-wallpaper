@@ -18,9 +18,9 @@
  *     grid row & column
  *             ⬇️
  *     canvas pixel position (x, y)
- * 
+ *
  * SAFETY:
- * 
+ *
  * If the provided index is outside the valid grid range:
  *
  *     index < 0 OR index ≥ rows × columns
@@ -29,9 +29,9 @@
  * This allows downstream rendering logic to proceed without requiring
  * conditional null-checks while ensuring invalid cells are not displayed.
  *
- * 
+ *
  * NOTE:
- * 
+ *
  * This file performs coordinate computation only.
  * It must NOT:
  * - classify cell state
@@ -46,8 +46,7 @@
  *         Canvas draw positions
  */
 
-
-import type { LayoutConfig, CellPosition } from '../types/life.types'
+import type { LayoutConfig, CellPosition } from '../types/life.types';
 
 /**
  *
@@ -64,17 +63,17 @@ export const getCellPosition = (
     return {
       x: -layoutConfig.cellSize,
       y: -layoutConfig.cellSize,
-    }
+    };
   }
 
-  const column = index % layoutConfig.columns
-  const row = Math.floor(index / layoutConfig.columns)
+  const column = index % layoutConfig.columns;
+  const row = Math.floor(index / layoutConfig.columns);
 
-  const x = layoutConfig.offsetX + column * layoutConfig.cellSize
-  const y = layoutConfig.offsetY + row * layoutConfig.cellSize
+  const x = layoutConfig.offsetX + column * layoutConfig.cellSize;
+  const y = layoutConfig.offsetY + row * layoutConfig.cellSize;
 
   return {
     x,
     y,
-  }
-}
+  };
+};

@@ -1,6 +1,6 @@
-/** 
+/**
  * LIFE TIMELINE CELL STATE MAPPING LAYER
- * 
+ *
  * This file is responsible for classifying each life-month cell into a
  * semantic rendering state based on the user's elapsed lifetime.
  *
@@ -12,7 +12,7 @@
  * determines how it should be drawn.
  *
  * CELL CLASSIFICATION MODEL:
- * 
+ *
  * Each life-month cell (identified by its index in the timeline grid)
  * is categorized into one of the following states:
  *
@@ -24,9 +24,9 @@
  * Classification is performed using:
  *     RenderConfig.fullMonthsLived
  *     RenderConfig.totalMonths
- * 
+ *
  * RENDERING IMPLICATIONS:
- * 
+ *
  * The returned CellState is used by the Canvas layer to determine:
  *
  * - fill color (past vs future)
@@ -53,7 +53,7 @@
  *        Canvas rendering logic
  */
 
-import type { CellState, RenderConfig } from '../types/life.types.ts'
+import type { CellState, RenderConfig } from '../types/life.types.ts';
 
 /**
  * function to return the cellState for each cell corresponding to its index
@@ -65,16 +65,16 @@ export const getCellState = (
   index: number,
   renderConfig: RenderConfig,
 ): CellState => {
-  const fullMonthsLived = renderConfig.fullMonthsLived
-  const totalMonths = renderConfig.totalMonths
+  const fullMonthsLived = renderConfig.fullMonthsLived;
+  const totalMonths = renderConfig.totalMonths;
 
-  if (index >= totalMonths || index < 0) return 'empty'
+  if (index >= totalMonths || index < 0) return 'empty';
 
   if (index < fullMonthsLived) {
-    return 'past'
+    return 'past';
   } else if (index === fullMonthsLived) {
-    return 'present'
+    return 'present';
   } else {
-    return 'future'
+    return 'future';
   }
-}
+};
