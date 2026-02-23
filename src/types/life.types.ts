@@ -136,7 +136,7 @@ export interface UserConfig {
  */
 export interface RenderConfig {
   /**
-   *  Total number of life months to render.
+   * Total number of life months to render.
    * Computed as: expectancy * 12
    */
   totalMonths: number
@@ -153,19 +153,15 @@ export interface RenderConfig {
   currentMonthProgress: number
 
   /**
-   * Canvas width in pixels.
-   */
-  canvasWidth: number
-
-  /**
-   * Canvas height in pixels.
-   */
-  canvasHeight: number
-
-  /**
    * Active theme mode used during rendering.
    */
   themeMode: ThemeMode
+
+  /**
+   * Personal message of user
+   */
+
+  message: string
 
   /**
    * Shape used to render timeline cells.
