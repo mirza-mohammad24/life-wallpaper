@@ -27,7 +27,7 @@ export default function PersonalMessage({ message }: PersonalMessageProps) {
 
   return (
     <div className="absolute top-10 left-0 w-full flex justify-center text-center px-6 pointer-events-none select-none">
-      <p className="text-xl md:text-2xl font-light tracking-wide text-slate-700 dark:text-white/70 drop-shadow-sm max-w-4xl">
+      <p className="text-3xl md:text-4xl lg:text-5xl font-light tracking-wide text-slate-700 dark:text-white/70 drop-shadow-md max-w-5xl">
         {message}
       </p>
     </div>
