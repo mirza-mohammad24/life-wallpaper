@@ -16,7 +16,6 @@
  * ensure the settings menu doesn't permanently obscure the wallpaper canvas.
  */
 
-
 import type { ChangeEvent, SyntheticEvent } from 'react';
 import { useState } from 'react';
 import type { UserConfig } from '../types/life.types.ts';
@@ -34,7 +33,10 @@ interface SettingsOverlayProps {
   onSave: (newConfig: UserConfig) => void;
 }
 
-export default function SettingsOverlay({currentConfig, onSave} : SettingsOverlayProps) {
+export default function SettingsOverlay({
+  currentConfig,
+  onSave,
+}: SettingsOverlayProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const [formData, setFormData] = useState<UserConfig>(currentConfig);

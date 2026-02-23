@@ -1,3 +1,8 @@
 @import 'tailwindcss';
 /* This forces Tailwind v4 to apply dark mode ONLY when the .dark class is present */
 @custom-variant dark (&:where(.dark, .dark *));
+
+/*Enhances the CountdownTimer component (the clock)*/
+.timer-text {
+  -webkit-text-stroke: 0.6px rgba(0, 0, 0, 0.6);
+}

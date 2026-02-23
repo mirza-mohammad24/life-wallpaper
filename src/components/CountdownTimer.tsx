@@ -141,55 +141,127 @@ export default function CountdownTimer({
 
   return (
     // text-slate-800 for light mode, dark:text-white/90 for dark mode
-    <div className="flex flex-col items-center justify-center w-full h-full font-mono text-slate-800 dark:text-white/90 drop-shadow-md select-none">
-      <div className="flex gap-4 text-6xl font-light tracking-wider">
-        <div className="flex flex-col items-center">
-          <span ref={yearsRef}>00</span>
-          <span className="text-sm tracking-widest text-slate-500 dark:text-white/50 mt-1 uppercase">
-            Years
-          </span>
-        </div>
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+      <div className="flex flex-col items-center justify-center">
+        <div className="flex gap-4 text-6xl font-light tracking-wider">
+          <div className="flex flex-col items-center">
+            <span
+              ref={yearsRef}
+              className="
+                timer-text
+                text-slate-800 dark:text-white/90
+                drop-shadow-[0_0_6px_rgba(0,0,0,0.7)]
+                dark:drop-shadow-[0_0_6px_rgba(0,0,0,1)]
+              "
+            >
+              00
+            </span>
+            <span className="text-sm tracking-widest text-slate-900 dark:text-white/50 mt-1 uppercase">
+              Years
+            </span>
+          </div>
 
-        <div className="flex flex-col items-center">
-          <span ref={monthsRef}>00</span>
-          <span className="text-sm tracking-widest text-slate-500 dark:text-white/50 mt-1 uppercase">
-            Months
-          </span>
-        </div>
+          <div className="flex flex-col items-center">
+            <span
+              ref={monthsRef}
+              className="
+              timer-text
+              text-slate-800 dark:text-white/90
+              drop-shadow-[0_0_6px_rgba(0,0,0,0.7)]
+              dark:drop-shadow-[0_0_6px_rgba(0,0,0,1)]
+            "
+            >
+              00
+            </span>
+            <span className="text-sm tracking-widest text-slate-900 dark:text-white/50 mt-1 uppercase">
+              Months
+            </span>
+          </div>
 
-        <div className="flex flex-col items-center">
-          <span ref={daysRef}>00</span>
-          <span className="text-sm tracking-widest text-slate-500 dark:text-white/50 mt-1 uppercase">
-            Days
-          </span>
-        </div>
+          <div className="flex flex-col items-center">
+            <span
+              ref={daysRef}
+              className="
+              timer-text
+              text-slate-800 dark:text-white/90
+              drop-shadow-[0_0_6px_rgba(0,0,0,0.7)]
+              dark:drop-shadow-[0_0_6px_rgba(0,0,0,1)]
+            "
+            >
+              00
+            </span>
+            <span className="text-sm tracking-widest text-slate-900 dark:text-white/50 mt-1 uppercase">
+              Days
+            </span>
+          </div>
 
-        <div className="flex flex-col items-center">
-          <span ref={hoursRef}>00</span>
-          <span className="text-sm tracking-widest text-slate-500 dark:text-white/50 mt-1 uppercase">
-            Hours
-          </span>
-        </div>
+          <div className="flex flex-col items-center">
+            <span
+              ref={hoursRef}
+              className="
+              timer-text
+              text-slate-800 dark:text-white/90
+              drop-shadow-[0_0_6px_rgba(0,0,0,0.7)]
+              dark:drop-shadow-[0_0_6px_rgba(0,0,0,1)]
+            "
+            >
+              00
+            </span>
+            <span className="text-sm tracking-widest text-slate-900 dark:text-white/50 mt-1 uppercase">
+              Hours
+            </span>
+          </div>
 
-        <div className="flex flex-col items-center">
-          <span ref={minsRef}>00</span>
-          <span className="text-sm tracking-widest text-slate-500 dark:text-white/50 mt-1 uppercase">
-            Minutes
-          </span>
-        </div>
+          <div className="flex flex-col items-center">
+            <span
+              ref={minsRef}
+              className="
+              timer-text
+              text-slate-800 dark:text-white/90
+              drop-shadow-[0_0_6px_rgba(0,0,0,0.7)]
+              dark:drop-shadow-[0_0_6px_rgba(0,0,0,1)]
+            "
+            >
+              00
+            </span>
+            <span className="text-sm tracking-widest text-slate-900 dark:text-white/50 mt-1 uppercase">
+              Minutes
+            </span>
+          </div>
 
-        <div className="flex flex-col items-center">
-          <span ref={secsRef}>00</span>
-          <span className="text-sm tracking-widest text-slate-500 dark:text-white/50 mt-1 uppercase">
-            Seconds
-          </span>
-        </div>
+          <div className="flex flex-col items-center">
+            <span
+              ref={secsRef}
+              className="
+              timer-text
+              text-slate-800 dark:text-white/90
+              drop-shadow-[0_0_6px_rgba(0,0,0,0.7)]
+              dark:drop-shadow-[0_0_6px_rgba(0,0,0,1)]
+            "
+            >
+              00
+            </span>
+            <span className="text-sm tracking-widest text-slate-900 dark:text-white/50 mt-1 uppercase">
+              Seconds
+            </span>
+          </div>
 
-        <div className="flex flex-col items-center">
-          <span ref={msRef}>00</span>
-          <span className="text-sm tracking-widest text-slate-500 dark:text-white/50 mt-1 uppercase">
-            MS
-          </span>
+          <div className="flex flex-col items-center">
+            <span
+              ref={msRef}
+              className="
+                timer-text
+                text-slate-800 dark:text-white/90
+                drop-shadow-[0_0_6px_rgba(0,0,0,0.7)]
+                dark:drop-shadow-[0_0_6px_rgba(0,0,0,1)]
+              "
+            >
+              00
+            </span>
+            <span className="text-sm tracking-widest text-slate-900 dark:text-white/50 mt-1 uppercase">
+              MS
+            </span>
+          </div>
         </div>
       </div>
     </div>

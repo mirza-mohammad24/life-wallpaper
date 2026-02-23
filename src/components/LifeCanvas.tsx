@@ -9,7 +9,6 @@
  * 4. Engine Delegation: Passing the configured Canvas context to the `renderLifeTimeline` math engine.
  */
 
-
 import type { RenderConfig } from '../types/life.types.ts';
 import { useEffect, useRef } from 'react';
 import { renderLifeTimeline } from '../canvas/life.renderLoop.ts';
@@ -18,11 +17,10 @@ interface LifeCanvasProps {
   renderConfig: RenderConfig;
 }
 
-
 /**
  * Prepares the canvas for a crisp, pixel-perfect render and triggers the drawing engine.
- * This function handles the complex math required for High-DPI (Retina) displays. 
- * It artificially inflates the internal pixel count of the canvas while using CSS 
+ * This function handles the complex math required for High-DPI (Retina) displays.
+ * It artificially inflates the internal pixel count of the canvas while using CSS
  * to compress its physical display size, resulting in razor-sharp graphics.
  * @param {HTMLCanvasElement} canvas - The physical DOM element to be resized.
  * @param {CanvasRenderingContext2D} ctx - The 2D rendering context to be scaled.
@@ -58,10 +56,9 @@ const repaintCanvas = (
   renderLifeTimeline(ctx, renderConfig, cssWidth, cssHeight);
 };
 
-
 /**
  * The React Component that mounts and manages the life timeline canvas.
- * * It strictly acts as a background wallpaper (-z-10) and automatically 
+ * * It strictly acts as a background wallpaper (-z-10) and automatically
  * triggers re-renders whenever the window resizes or the user's config changes.
  * * @param {LifeCanvasProps} props - The component props containing the render configuration.
  */

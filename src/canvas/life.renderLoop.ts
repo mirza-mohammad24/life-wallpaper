@@ -23,7 +23,6 @@ import { getCellPosition } from '../utils/life.position.ts';
 import { getCellState } from '../utils/life.cells.ts';
 import { computeGridLayout } from '../utils/life.layout';
 
-
 /**
  * Executes a complete render cycle of the life timeline onto the provided Canvas.
  *
