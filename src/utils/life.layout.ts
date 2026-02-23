@@ -114,26 +114,20 @@
  * It strictly adapts timeline size to viewport geometry.
  */
 
-interface returnVal {
-  rows: number
-  columns: number
-  cellSize: number
-  offsetX: number
-  offsetY: number
-}
+import type { LayoutConfig } from "../types/life.types.ts"
 
 /**
  * Function to calculate the layout of the grid
  * @param {number} totalMonths provide the totalMonths
  * @param {number} width provide the viewport width
  * @param {number} height provide the viewport height
- * @returns {returnVal} returns number of rows, columns, cellSize, offsetX, offsetY
+ * @returns {LayoutConfig} returns number of rows, columns, cellSize, offsetX, offsetY
  */
 export const computeGridLayout = (
   totalMonths: number,
   width: number,
   height: number,
-): returnVal => {
+): LayoutConfig => {
   const horizontalPadding = 0.1 * width //10% of width
   const verticalPadding = 0.1 * height //10% of height
 

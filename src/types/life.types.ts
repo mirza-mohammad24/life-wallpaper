@@ -39,7 +39,7 @@
  * This affects how the Canvas renderer draws individual timeline units.
  * React layer selects this value via user configuration.
  */
-export type Shape = 'square' | 'circle' | 'heart';
+export type Shape = 'square' | 'circle' | 'heart'
 
 /**
  * Defines the active theme preference selected by the user.
@@ -47,14 +47,14 @@ export type Shape = 'square' | 'circle' | 'heart';
  * This determines the color palette used by the Canvas renderer
  * during timeline drawing.
  */
-export type ThemePreference = 'light' | 'dark' | 'system';
+export type ThemePreference = 'light' | 'dark' | 'system'
 
 /**
  * Defines the active theme mode.
- * 
+ *
  * Its value is dynamically resolved on the basis of user's ThemePreference
  */
-export type ThemeMode = 'light' | 'dark';
+export type ThemeMode = 'light' | 'dark'
 
 /**
  * Semantic classification of a single life-month cell.
@@ -70,7 +70,23 @@ export type ThemeMode = 'light' | 'dark';
  * - future: not yet lived
  * - empty: optional safety fallback
  */
-export type CellState = 'past' | 'present' | 'future' | 'empty';
+export type CellState = 'past' | 'present' | 'future' | 'empty'
+
+/**
+ * Position of the cell inside the grid
+ * 
+ * Used by the Canvas rendering engine to determine:
+ * -x co ordinate of the cell
+ * -y co ordinate of the cell
+ * 
+ * This object is:
+ * -produced by the utils layer
+ * -consumed by the Canvas renderer
+ */
+export interface CellPosition {
+  x: number
+  y: number
+}
 
 /**
  * USER CONFIGURATION MODEL
@@ -130,7 +146,7 @@ export interface UserConfig {
  *
  * This object is:
  * -produced by the utils layer
- * -consumed by the Canvas rendered
+ * -consumed by the Canvas renderer
  *
  * MUST NEVER be persisted in localStorage
  */
@@ -167,6 +183,68 @@ export interface RenderConfig {
    * Shape used to render timeline cells.
    */
   shape: Shape
+}
+
+/**
+ * GRID LAYOUT CONFIGURATION MODEL
+ *
+ * Represents the spatial geometry of the life timeline grid as it should be
+ * rendered on the screen.
+ *
+ * This configuration is produced by the layout computation layer
+ * (life.layout.ts) after adapting the total life duration to the available
+ * viewport dimensions.
+ *
+ * It defines:
+ * - how many rows and columns the life grid contains
+ * - the pixel size of each life-month cell
+ * - the positional offset required to visually center the grid
+ *
+ * These values are consumed by:
+ * - position mapping layer (life.position.ts)
+ * - canvas rendering engine (drawing logic)
+ *
+ * NOTE:
+ *
+ * LayoutConfig represents geometry only.
+ * It must NOT contain:
+ * - time-derived values
+ * - user preferences
+ * - rendering states
+ *
+ * It is strictly a viewport-adapted spatial mapping of the timeline.
+ */
+export interface LayoutConfig {
+  /**
+   *  Number of grid rows required to represent the full life timeline.
+   */
+  rows: number
+
+  /**
+   * Number of grid columns required such that:
+   * rows * columns >= totalMonths
+   */
+  columns: number
+
+  /**
+   * Side length (in pixels) of each square grid cell allocated for a
+   * life-month unit.
+   */
+  cellSize: number
+
+  /**
+   * Horizontal offset (in pixels) from the left edge of the viewport
+   * indicating where the grid should begin drawing in order to remain
+   * visually centered.
+   */
+  offsetX: number
+
+  /**
+   * Vertical offset (in pixels) from the top edge of the viewport
+   * indicating where the grid should begin drawing in order to remain
+   * visually centered.
+   */
+  offsetY: number
 }
 
 /**
