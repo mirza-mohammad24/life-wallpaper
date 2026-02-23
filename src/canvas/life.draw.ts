@@ -234,6 +234,7 @@ export const drawCircleCell = (
  * @param {number} y - The top-left Y coordinate of the bounding box.
  * @param {number} size - The width and height of the bounding box.
  */
+
 const createHeartPath = (
   ctx: CanvasRenderingContext2D,
   x: number,
@@ -241,11 +242,56 @@ const createHeartPath = (
   size: number,
 ): void => {
   ctx.beginPath();
-  ctx.moveTo(x + size / 2, y);
 
-  ctx.bezierCurveTo(x, y, x, y + size / 2, x + size / 2, y + size);
+  // We'll define some internal offsets to keep the heart centered in the box
+  const topY = y + size * 0.25;
+  const bottomY = y + size * 0.95;
+  const centerX = x + size / 2;
+  const leftX = x;
+  const rightX = x + size;
 
-  ctx.bezierCurveTo(x + size, y + size / 2, x + size, y, x + size / 2, y);
+  // Start at the bottom point of the heart
+  ctx.moveTo(centerX, bottomY);
+
+  // Left side of the heart (bottom to top-left)
+  ctx.bezierCurveTo(
+    x + size * 0.2,
+    y + size * 0.7, // Control point 1 (bottom left)
+    leftX,
+    y + size * 0.5, // Control point 2 (middle left)
+    leftX,
+    topY, // End point (top left lobe)
+  );
+
+  // Top left lobe
+  ctx.bezierCurveTo(
+    leftX,
+    y, // CP 1
+    x + size * 0.4,
+    y, // CP 2
+    centerX,
+    y + size * 0.3, // End point (center dip)
+  );
+
+  // Top right lobe
+  ctx.bezierCurveTo(
+    x + size * 0.6,
+    y, // CP 1
+    rightX,
+    y, // CP 2
+    rightX,
+    topY, // End point (top right lobe)
+  );
+
+  // Right side of the heart (top-right to bottom)
+  ctx.bezierCurveTo(
+    rightX,
+    y + size * 0.5, // CP 1 (middle right)
+    x + size * 0.8,
+    y + size * 0.7, // CP 2 (bottom right)
+    centerX,
+    bottomY, // Back to start!
+  );
 
   ctx.closePath();
 };
@@ -284,11 +330,11 @@ export const drawHeartCell = (
     createHeartPath(ctx, drawX, drawY, drawSize);
     ctx.fill();
   } else if (state === 'present') {
-    const fillWidth = Math.max(Math.min(drawSize * progress, drawSize), 0);
+    const fillHeight = Math.max(Math.min(drawSize * progress, drawSize), 0);
 
     ctx.save();
     ctx.beginPath();
-    ctx.rect(drawX, drawY, fillWidth, drawSize);
+    ctx.rect(drawX, drawY + (drawSize - fillHeight), drawSize, fillHeight);
     ctx.clip();
 
     ctx.fillStyle = getCellColor(index, totalMonths, fullMonthsLived, theme);
