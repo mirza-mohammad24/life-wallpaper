@@ -39,10 +39,10 @@
  * DOMAIN GUARANTEES:
  *
  * The returned RenderConfig ensures:
- * - totalMonths ≥ 0
- * - fullMonthsLived ≥ 0
- * - currentMonthProgress ∈ [0,1]
- * - themeMode ∈ {"light", "dark"}
+ * - totalMonths >= 0
+ * - fullMonthsLived >= 0
+ * - currentMonthProgress is clamped between [0,1]
+ * - themeMode belongs to {"light", "dark"}
  *
  * This guarantees the Canvas renderer receives safe, deterministic input.
  *
@@ -86,7 +86,7 @@ function resolveTheme(themePreference: ThemePreference): ThemeMode {
 }
 
 /**
- * The function to convert the userConfig into renderConfig
+ * The function to parse the userConfig(local storage) into renderConfig
  * @param {UserConfig} userConfig pass the userConfig
  * @returns {RenderConfig} returns the renderConfig to be consumed by the Canvas rendering engine
  */

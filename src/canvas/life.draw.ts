@@ -50,7 +50,7 @@ const DARK_THEME = {
  * @returns {string} A valid CSS rgb() string for the Canvas API
  */
 const lerpColor = (startColor: RGB, endColor: RGB, t: number): string => {
-  const safeT = Math.max(Math.min(t, 1), 0);
+  const safeT = Math.max(Math.min(t, 1), 0); //clamped between [0,1]
 
   const r = Math.round(startColor[0] + (endColor[0] - startColor[0]) * safeT);
   const g = Math.round(startColor[1] + (endColor[1] - startColor[1]) * safeT);
@@ -84,7 +84,7 @@ const getCellColor = (
     return theme === 'light' ? LIGHT_THEME.future : DARK_THEME.future;
   }
 
-  const t = Math.min(index / totalMonths, 1);
+  const t = Math.min(index / totalMonths, 1); //clamped between [0,1]
 
   if (theme === 'light') {
     return lerpColor(LIGHT_THEME.start, LIGHT_THEME.end, t);
@@ -96,7 +96,7 @@ const getCellColor = (
 /**
  * Renders a square cell on the canvas, applying dynamic gap padding.
  * * @param {CanvasRenderingContext2D} ctx - The active Canvas 2D rendering context.
- * @param {CellPosition} position - The absolute (x, y) top-left grid coordinate.
+ * @param {CellPosition} position - The absolute (x, y) top-left coordinate of the cell.
  * @param {number} cellSize - The maximum bounded size of the grid cell.
  * @param {CellState} state - 'past' (filled), 'present' (filling), or 'future' (empty).
  * @param {number} progress - Fractional completion of the current month [0, 1].

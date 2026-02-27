@@ -5,10 +5,8 @@
  * motivational message or quote over the wallpaper.
  *
  * ARCHITECTURAL DESIGN:
- * - Positioned absolutely near the bottom to avoid interfering with the
+ * - Positioned absolutely at the top to avoid interfering with the
  * central timer layout.
- * - Uses pointer-events-none so it doesn't accidentally block clicks
- * if the user interacts with the desktop background.
  * - Respects the global Tailwind dark mode state.
  */
 

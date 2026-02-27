@@ -9,12 +9,11 @@
  * This component intentionally bypasses the standard React rendering cycle
  * (i.e., `useState` and `setState`) for the clock tick.
  *
- * Why?
+ * The reason behind this decision is:
  * Standard React state updates trigger a full re-render of the component tree.
  * Because this clock tracks milliseconds, relying on React state would cause
- * the component to re-render ~60 times per second. In a Lively Wallpaper
- * environment, this would cause severe performance degradation, stuttering,
- * and massive CPU overhead.
+ * the component to re-render ~60 times per second. This would cause severe 
+ * performance degradation, stuttering, and massive CPU overhead.
  *
  * The Solution:
  * 1. `useRef` is used to hold direct references to the physical DOM `<span>` elements.
@@ -41,6 +40,8 @@
 
 import { useEffect, useRef } from 'react';
 
+const pad = (num: number, size = 2) => num.toString().padStart(size, '0');
+
 interface CountdownTimerProps {
   dob: string;
   expectancy: number;
@@ -58,17 +59,28 @@ export default function CountdownTimer({
   const minsRef = useRef<HTMLSpanElement | null>(null);
   const secsRef = useRef<HTMLSpanElement | null>(null);
   const msRef = useRef<HTMLSpanElement | null>(null);
-
+  
   useEffect(() => {
     const birthDate = new Date(`${dob}T00:00:00`);
     const endDate = new Date(birthDate);
     endDate.setFullYear(endDate.getFullYear() + expectancy);
+
+    //cache years months days hours and mins they will change rarely (we run this at 60 or 120Hz)
+    let prevYears = '', prevMonths = '', prevDays = '', prevHours = '', prevMins = '', prevSecs = '';
+
+    //this won't be changing
+    const daysInLastMonth = new Date(
+      endDate.getFullYear(),
+      endDate.getMonth(),
+      0,
+    ).getDate();
 
     let animationFrameId: number;
 
     const updateTimer = () => {
       const now = new Date();
 
+      //base case: The loop will stop when now >= endDate
       if (now >= endDate) {
         if (yearsRef.current) yearsRef.current.innerText = '00';
         if (monthsRef.current) monthsRef.current.innerText = '00';
@@ -107,11 +119,6 @@ export default function CountdownTimer({
       }
       if (days < 0) {
         months--;
-        const daysInLastMonth = new Date(
-          endDate.getFullYear(),
-          endDate.getMonth(),
-          0,
-        ).getDate();
         days += daysInLastMonth;
       }
       if (months < 0) {
@@ -122,18 +129,46 @@ export default function CountdownTimer({
       //converting ms to 2 digits
       const displayMs = Math.floor(ms / 10);
 
-      const pad = (num: number, size = 2) => num.toString().padStart(size, '0');
+      const paddedYears = pad(years);
+      const paddedMonths = pad(months);
+      const paddedDays = pad(days);
+      const paddedHours = pad(hours);
+      const paddedMins = pad(mins);
+      const paddedSecs = pad(secs);
 
-      if (yearsRef.current) yearsRef.current.innerText = pad(years);
-      if (monthsRef.current) monthsRef.current.innerText = pad(months);
-      if (daysRef.current) daysRef.current.innerText = pad(days);
-      if (hoursRef.current) hoursRef.current.innerText = pad(hours);
-      if (minsRef.current) minsRef.current.innerText = pad(mins);
-      if (secsRef.current) secsRef.current.innerText = pad(secs);
+      if (prevYears !== paddedYears){
+        if (yearsRef.current) yearsRef.current.innerText = paddedYears;
+        prevYears = paddedYears; //cache it
+      }
+      if (prevMonths !== paddedMonths){
+        if (monthsRef.current) monthsRef.current.innerText = paddedMonths;
+        prevMonths = paddedMonths; //cache it
+      }
+      if (prevDays !== paddedDays){
+        if (daysRef.current) daysRef.current.innerText = paddedDays;
+        prevDays = paddedDays; //cache it
+      }
+      if (prevHours !== paddedHours){
+        if (hoursRef.current) hoursRef.current.innerText = paddedHours;
+        prevHours = paddedHours; //cache it
+      }
+      if (prevMins !== paddedMins){
+        if (minsRef.current) minsRef.current.innerText = paddedMins;
+        prevMins = paddedMins; //cache it
+      }
+      if (prevSecs !== paddedSecs){
+        if (secsRef.current) secsRef.current.innerText = paddedSecs;
+        prevSecs = paddedSecs; //cache it
+      }
+
+      //no need to cache (too frequent)
       if (msRef.current) msRef.current.innerText = pad(displayMs);
 
+      //keep on running indefinitely till now>=endDate
       animationFrameId = requestAnimationFrame(updateTimer);
     };
+
+    //start the process
     animationFrameId = requestAnimationFrame(updateTimer);
 
     return () => cancelAnimationFrame(animationFrameId);

@@ -23,7 +23,7 @@
  *
  * DATA FLOW:
  *
- * UserConfig (dob)
+ * userConfig (dob)
  *        ↓
  * getFullMonthsLived(dob)
  * getCurrentMonthProgress(dob)
@@ -104,6 +104,6 @@ export const getCurrentMonthProgress = (dob: string): number => {
 
   const progress = elapsed / duration;
 
-  //ensures the range of [0,1]
+  //clamp the range between [0,1]
   return Math.min(Math.max(progress, 0), 1);
 };

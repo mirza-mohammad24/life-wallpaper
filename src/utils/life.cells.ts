@@ -58,7 +58,7 @@ import type { CellState, RenderConfig } from '../types/life.types.ts';
 /**
  * function to return the cellState for each cell corresponding to its index
  * @param {number} index provide the index of the cell
- * @param {RenderConfig} renderConfig provide the renderConfig for the user
+ * @param {RenderConfig} renderConfig provide the renderConfig of the user
  * @returns {CellState} corresponding CellState : 'past', 'present', 'future', 'empty'
  */
 export const getCellState = (

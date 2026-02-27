@@ -2,7 +2,7 @@
  * This file has only 3 responsibilities(our persistence layer):
  * -load userConfig from localStorage
  * -save userConfig to localStorage
- * -fallback to defaultConfig() if nothing exists in the localStorage
+ * -fallback to defaultConfig if nothing exists in the localStorage
  */
 
 import type {
@@ -10,6 +10,7 @@ import type {
   ThemePreference,
   UserConfig,
 } from '../types/life.types.ts';
+
 import { defaultConfig } from '../types/life.types.ts';
 
 const LOCAL_STORAGE_KEY = 'life_timeline_config';

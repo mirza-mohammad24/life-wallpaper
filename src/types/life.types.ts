@@ -13,7 +13,7 @@
  *      ⬇️
  *      RenderConfig (computed renderer contract)
  *      ⬇️
- *      Canvas REndering Engine (draws life timeline)
+ *      Canvas Rendering Engine (draws life timeline)
  *
  * IMPORTANT ARCHITECTURAL RULE:
  * -UserConfig contains ONLY user-controlled input values.
@@ -52,7 +52,7 @@ export type ThemePreference = 'light' | 'dark' | 'system';
 /**
  * Defines the active theme mode.
  *
- * Its value is dynamically resolved on the basis of user's ThemePreference
+ * Its value is dynamically resolved on the basis of user's ThemePreference.
  */
 export type ThemeMode = 'light' | 'dark';
 
@@ -95,7 +95,7 @@ export interface CellPosition {
  *
  * This object is:
  * -collected via React UI
- * -validated in utils layers
+ * -validated in SettingsOverlay.tsx
  * -persisted in localStorage
  *
  * MUST NOT contain derived values such as:

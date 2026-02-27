@@ -121,7 +121,7 @@ import type { LayoutConfig } from '../types/life.types.ts';
  * @param {number} totalMonths provide the totalMonths
  * @param {number} width provide the viewport width
  * @param {number} height provide the viewport height
- * @returns {LayoutConfig} returns number of rows, columns, cellSize, offsetX, offsetY
+ * @returns {LayoutConfig} returns number of rows, columns, cellSize, offsetX and offsetY
  */
 export const computeGridLayout = (
   totalMonths: number,

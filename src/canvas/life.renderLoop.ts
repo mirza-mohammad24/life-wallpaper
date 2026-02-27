@@ -3,7 +3,7 @@
  *
  * This file acts as the primary orchestrator for the canvas rendering engine.
  * It bridges the pure mathematical domain (Layout, Age, Positioning) with
- * the visual domain (Shapes, Colors, Canvas Context).
+ * the visual domain (Shapes, Colors and Canvas Context).
  *
  * ARCHITECTURAL FLOW:
  * 1. Wipes the canvas clean to prevent ghosting across re-renders or resizes.
@@ -12,9 +12,8 @@
  * 4. For each month, resolves its exact (x, y) spatial coordinate and semantic state.
  * 5. Delegates the actual pixel-drawing to the specific shape renderer requested by the user.
  *
- * This function is designed to be called rapidly (e.g., inside a requestAnimationFrame
- * or a ResizeObserver callback) and relies on the underlying O(1) math functions
- * to maintain high performance without dropping frames.
+ * This function is designed to be called rapidly and relies on the underlying O(1) 
+ * math functions to maintain high performance without dropping frames.
  */
 
 import type { RenderConfig } from '../types/life.types';

@@ -58,7 +58,7 @@ export const getCellPosition = (
   index: number,
   layoutConfig: LayoutConfig,
 ): CellPosition => {
-  // for invalid index this will be drawn outside the screen so will not be visible
+  // for invalid index this will be drawn outside the screen so will not be visible on the screen
   if (index < 0 || index >= layoutConfig.columns * layoutConfig.rows) {
     return {
       x: -layoutConfig.cellSize,

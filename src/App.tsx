@@ -26,13 +26,13 @@ import CountdownTimer from './components/CountdownTimer.tsx';
 import PersonalMessage from './components/PersonalMessage.tsx';
 
 export default function App() {
-  // 1. Initialize State from Persistence Layer
+  // Initialize State from Persistence Layer
   const [userConfig, setUserConfig] = useState<UserConfig>(loadConfig());
 
   // A dummy state to force a React re-render when the OS theme changes
   const [, setSystemThemeTick] = useState(0);
 
-  // 2. System Theme Listener
+  // System Theme Listener
   useEffect(() => {
     // Only listen to OS changes if the user specifically requested "system" theme
     if (userConfig.theme !== 'system') return;
@@ -43,7 +43,6 @@ export default function App() {
       setSystemThemeTick((tick) => tick + 1);
     };
 
-    // Modern browsers support addEventListener on MediaQueryList
     mediaQuery.addEventListener('change', handleChange);
 
     return () => {
@@ -51,12 +50,11 @@ export default function App() {
     };
   }, [userConfig.theme]);
 
-  // 3. Derive Runtime Configuration
-  // This runs whenever userConfig changes OR when systemThemeTick forces a re-render
+  // Derive Runtime Configuration
   const renderConfig = buildRenderConfig(userConfig);
   const isDark = renderConfig.themeMode === 'dark';
 
-  // 4. Update Handler
+  // Update Handler
   const handleConfigUpdate = (newConfig: UserConfig) => {
     setUserConfig(newConfig);
     saveConfig(newConfig);
@@ -70,14 +68,12 @@ export default function App() {
         isDark ? 'dark bg-slate-950' : 'bg-slate-50'
       }`}
     >
-      {/* --- LAYER 1: CANVAS ENGINE (BACKGROUND) --- */}
-      {/* The canvas component handles its own z-index (-z-10) and full-screen sizing */}
+      {/*  LAYER 1: CANVAS ENGINE (BACKGROUND) */}
+      {/* The canvas component handles its own z-index (sits as the background) and full-screen sizing */}
       <LifeCanvas renderConfig={renderConfig} />
 
-      {/* --- LAYER 2: REACT UI (FOREGROUND) --- */}
-      {/* pointer-events-none ensures the invisible wrapper doesn't block 
-        interaction with the desktop behind the Lively Wallpaper. 
-      */}
+      {/*  LAYER 2: REACT UI (FOREGROUND)  */}
+      {/* The react layer sits on top of background (canvas layer)*/}
       <div className="absolute inset-0 z-10 pointer-events-none">
         {/* Settings Button & Drawer (Must re-enable pointer events) */}
         <div className="pointer-events-auto">
