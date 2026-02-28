@@ -1,4 +1,4 @@
-![Preview](./src/assets/social_preview.png)
+![Preview](./assets/social_preview.png)
 
 # Life Wallpaper ⏳
 
