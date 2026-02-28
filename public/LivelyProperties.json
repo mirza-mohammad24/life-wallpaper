@@ -1,0 +1,32 @@
+{
+  "dob": {
+    "text": "Date of Birth (YYYY-MM-DD)", 
+    "type": "textbox", 
+    "value": "1995-01-01" 
+  },
+  "expectancy": { 
+    "text": "Life Expectancy", 
+    "type": "slider", 
+    "value": 80, 
+    "min": 1, 
+    "max": 150, 
+    "step": 1 
+  },
+  "message": { 
+    "text": "Personal Message", 
+    "type": "textbox", 
+    "value": "Your time, your story." 
+  },
+  "theme": { 
+    "text": "Theme Preference", 
+    "type": "dropdown", 
+    "value": 1, 
+    "items": ["Light", "Dark"]
+  },
+  "shape": { 
+    "text": "Cell Shape", 
+    "type": "dropdown", 
+    "value": 0, 
+    "items": ["Square", "Circle", "Heart"] 
+  }
+}

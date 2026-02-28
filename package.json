@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build:ext": "tsc -b && vite build --mode extension",
+    "build:lively": "tsc -b && vite build --mode lively",
     "lint": "eslint .",
     "preview": "vite preview",
     "format": "prettier --write ."

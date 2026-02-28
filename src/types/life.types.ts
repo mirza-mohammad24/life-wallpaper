@@ -262,3 +262,22 @@ export const defaultConfig: UserConfig = {
   theme: 'light',
   shape: 'square',
 };
+
+
+/**
+ * GLOBAL WINDOW EXTENSIONS
+ * * Extends the native browser Window interface to support third-party 
+ * desktop wallpaper engines (e.g., Lively Wallpaper for Windows).
+ */
+declare global {
+  /**
+   * Lively Wallpaper Integration Hook
+   * * When the application is hosted inside Lively, the engine injects
+   * user interactions from its native C# menu directly into this function.
+   * * @param {string} name - The JSON key of the property being changed (e.g., 'dob', 'theme').
+   * @param {string | number} val - The new value provided by the user.
+   */
+  interface Window {
+    livelyPropertyListener?: (name: string, val: string | number) => void;
+  }
+}

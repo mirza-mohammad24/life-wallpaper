@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Life Wallpaper",
+  "version": "1.0.0",
+  "description": "A visually elegant life timeline and countdown wallpaper for your new tab.",
+  "icons": {
+    "128": "icon128.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "offline_enabled": true
+}
