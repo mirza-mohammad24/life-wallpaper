@@ -1,3 +1,5 @@
+![Preview](./src/assets/social_preview.png)
+
 # Life Wallpaper ⏳
 
 A high-performance, privacy-focused life timeline and countdown tracker built to visualize your journey in months across your browser and desktop.
