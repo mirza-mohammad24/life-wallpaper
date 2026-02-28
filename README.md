@@ -71,9 +71,12 @@ life-wallpaper/
 ├── public/
 │   ├── icon128.png               # Extension icon
 │   ├── LivelyInfo.json           # Lively Wallpaper metadata (AppVersion, Title, etc.)
-    |── thumbnailForLively.png    # Thumbnail for Lively Wallpaper
+|   |── thumbnailForLively.png    # Thumbnail for Lively Wallpaper
 │   ├── LivelyProperties.json     # Lively native UI configuration mapping
 │   └── manifest.json             # Chromium Extension Manifest V3
+|
+├── assets/
+|   ├── social_preview.png        # Repository social preview (used for GitHub Open Graph + README hero) 
 |   
 ├── src/
 │   ├── components/
